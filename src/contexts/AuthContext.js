@@ -1,5 +1,7 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
+import { auth } from '../services/api';
 
 const AuthContext = createContext(null);
 
@@ -20,32 +22,53 @@ export const AuthProvider = ({ children }) => {
         try {
           const res = await api.get('/auth/me');
           console.log('AuthContext: /auth/me response:', res.data);
+
+          // --- ENHANCED LOGGING FOR USER OBJECT AFTER /auth/me ---
+          console.log('AuthContext: User object from /auth/me:');
+          console.log('  ID:', res.data.id);
+          console.log('  Email:', res.data.email);
+          console.log('  Role:', res.data.role);
+          console.log('  Profile exists:', !!res.data.profile);
+          if (res.data.profile) {
+            console.log('  Profile ID:', res.data.profile.id);
+            console.log('  Profile Name:', res.data.profile.name);
+          }
+          // --- END ENHANCED LOGGING ---
+
           setUser(res.data);
           setIsAuthenticated(true);
           console.log('AuthContext: User authenticated successfully via token.');
         } catch (error) {
           console.error('AuthContext: Token validation failed:', error);
-          // If token validation fails, forcefully clear local storage and log out
-          logout(true); // Pass true to indicate a forced logout
+          logout(true);
         }
       }
       setIsLoading(false);
-      console.log('AuthContext: Loading complete. IsAuthenticated:', isAuthenticated);
+      console.log('AuthContext: Loading complete. IsAuthenticated:', !!localStorage.getItem('token'));
     };
 
     loadUserFromToken();
-  }, []); // Empty dependency array means this effect runs only once on mount
+  }, []);
 
   const login = async (email, password) => {
     setIsLoading(true);
     try {
       console.log('AuthContext: Attempting login...');
-      const res = await api.post('/auth/login', { email, password });
+      const res = await auth.login({ email, password });
       const { token, ...userData } = res.data;
 
       localStorage.setItem('token', token);
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       console.log('AuthContext: Login successful. Token stored and header set.');
+
+      // --- ENHANCED LOGGING FOR USER OBJECT AFTER LOGIN ---
+      console.log('AuthContext: User object after successful login:');
+      console.log('  ID:', userData.id);
+      console.log('  Email:', userData.email);
+      console.log('  Role:', userData.role);
+     
+      console.log('  Profile expected from /auth/me, not login endpoint directly.');
+      // --- END ENHANCED LOGGING ---
 
       setUser(userData);
       setIsAuthenticated(true);
@@ -55,18 +78,17 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error('AuthContext: Login failed:', error);
       setIsLoading(false);
-      throw new Error(error.response?.data?.message || 'Login failed. Please check your credentials.');
+      throw new Error(error.userMessage || error.message || 'Login failed. Please check your credentials.');
     }
   };
 
-  // Modified logout function to optionally clear all local storage
   const logout = (forceClear = false) => {
     console.log('AuthContext: Logging out. Force clear:', forceClear);
     if (forceClear) {
-      localStorage.clear(); // Clear ALL items from local storage for this origin
+      localStorage.clear();
       console.log('AuthContext: localStorage.clear() executed.');
     } else {
-      localStorage.removeItem('token'); // Only remove the token
+      localStorage.removeItem('token');
       console.log('AuthContext: token removed from localStorage.');
     }
     delete api.defaults.headers.common['Authorization'];
