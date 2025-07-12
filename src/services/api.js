@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://responsible-bravery.up.railway.app/api'; 
+const API_BASE_URL = 'https://mentorship-platform-backend-production.up.railway.app/api'; 
 
 console.log('Frontend API Base URL:', API_BASE_URL); 
 
