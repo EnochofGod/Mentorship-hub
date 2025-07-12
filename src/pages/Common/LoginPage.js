@@ -43,7 +43,7 @@ function LoginPage() {
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-4 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-xl mx-auto my-12">
         <LoginForm onSubmit={handleLogin} loading={loading} error={error} />
         <p className="mt-8 text-center text-gray-700 text-base">
           <a href="/forgot-password" className="font-bold text-pink-600 hover:text-indigo-500 transition-colors underline mr-4">
