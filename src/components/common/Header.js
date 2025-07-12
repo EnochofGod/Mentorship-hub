@@ -30,20 +30,20 @@ function Header() {
             {!isAuthenticated && (
               <>
                 <li>
-                  <Link to="/login" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
-                    <FaSignInAlt className="text-xl" /> Login
+                  <Link to="/login" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
+                    <FaSignInAlt className="text-2xl" />
                     <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Login</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/register" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
-                    <FaUserPlus className="text-xl" /> Register
+                  <Link to="/register" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
+                    <FaUserPlus className="text-2xl" />
                     <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Register</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/forgot-password" className="relative flex items-center gap-2 text-gray-700 hover:text-pink-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
-                    <FaKey className="text-xl" /> Forgot Password
+                  <Link to="/forgot-password" className="relative flex flex-col items-center text-gray-700 hover:text-pink-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
+                    <FaKey className="text-2xl" />
                     <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Forgot Password</span>
                   </Link>
                 </li>
@@ -52,8 +52,8 @@ function Header() {
             {isAuthenticated && user && (
               <>
                 <li>
-                  <Link to="/profile" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Profile">
-                    <FaUser className="text-xl" /> My Profile
+                  <Link to="/profile" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Profile">
+                    <FaUser className="text-2xl" />
                     <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Profile</span>
                   </Link>
                 </li>
@@ -61,20 +61,20 @@ function Header() {
                 {user.role === 'Admin' && (
                   <>
                     <li>
-                      <Link to="/admin/users" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Manage Users">
-                        <FaUsers className="text-xl" /> Users
+                      <Link to="/admin/users" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Manage Users">
+                        <FaUsers className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Users</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/admin/matches" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Matches">
-                        <FaExchangeAlt className="text-xl" /> Matches
+                      <Link to="/admin/matches" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Matches">
+                        <FaExchangeAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Matches</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/admin/sessions" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Sessions">
-                        <FaCalendarAlt className="text-xl" /> Sessions
+                      <Link to="/admin/sessions" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Sessions">
+                        <FaCalendarAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Sessions</span>
                       </Link>
                     </li>
@@ -84,26 +84,26 @@ function Header() {
                 {user.role === 'Mentor' && (
                   <>
                     <li>
-                      <Link to="/mentor/dashboard" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Mentor Dashboard">
-                        <FaChalkboardTeacher className="text-xl" /> Dashboard
+                      <Link to="/mentor/dashboard" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Mentor Dashboard">
+                        <FaChalkboardTeacher className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Dashboard</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/mentor/availability" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Set Availability">
-                        <FaCalendarAlt className="text-xl" /> My Availability
+                      <Link to="/mentor/availability" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Set Availability">
+                        <FaCalendarAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Availability</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/mentor/requests" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Requests">
-                        <FaListAlt className="text-xl" /> Requests
+                      <Link to="/mentor/requests" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Requests">
+                        <FaListAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Requests</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/mentor/sessions" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Sessions">
-                        <FaCalendarAlt className="text-xl" /> Sessions
+                      <Link to="/mentor/sessions" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Sessions">
+                        <FaCalendarAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Sessions</span>
                       </Link>
                     </li>
@@ -113,26 +113,26 @@ function Header() {
                 {user.role === 'Mentee' && (
                   <>
                     <li>
-                      <Link to="/mentee/dashboard" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Mentee Dashboard">
-                        <FaHome className="text-xl" /> Dashboard
+                      <Link to="/mentee/dashboard" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Mentee Dashboard">
+                        <FaHome className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Dashboard</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/mentors" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Find Mentors">
-                        <FaSearch className="text-xl" /> Find Mentors
+                      <Link to="/mentors" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Find Mentors">
+                        <FaSearch className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Find Mentors</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/mentee/my-requests" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Requests">
-                        <FaListAlt className="text-xl" /> My Requests
+                      <Link to="/mentee/my-requests" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Requests">
+                        <FaListAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Requests</span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/mentee/my-sessions" className="relative flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Sessions">
-                        <FaCalendarAlt className="text-xl" /> My Sessions
+                      <Link to="/mentee/my-sessions" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Sessions">
+                        <FaCalendarAlt className="text-2xl" />
                         <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Sessions</span>
                       </Link>
                     </li>
@@ -144,11 +144,11 @@ function Header() {
                 <li>
                   <button
                     onClick={() => { handleLogout(); setMenuOpen(false); }}
-                    className="relative flex items-center gap-2 bg-gradient-to-r from-pink-500 to-indigo-500 text-white px-5 py-2 rounded-lg font-bold shadow-md hover:from-indigo-500 hover:to-pink-500 transition-colors group focus:outline-none"
+                    className="relative flex flex-col items-center bg-gradient-to-r from-pink-500 to-indigo-500 text-white px-5 py-2 rounded-lg font-bold shadow-md hover:from-indigo-500 hover:to-pink-500 transition-colors group focus:outline-none"
                     title="Logout"
                     tabIndex={0}
                   >
-                    <FaSignOutAlt className="text-xl" /> Logout
+                    <FaSignOutAlt className="text-2xl" />
                     <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none z-50">Logout</span>
                   </button>
                 </li>
