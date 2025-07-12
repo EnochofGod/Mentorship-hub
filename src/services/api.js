@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000'; // Explicitly define the base URL
-console.log('Frontend API Base URL:', API_BASE_URL); // Debugging log
+const API_BASE_URL = 'https://responsible-bravery.up.railway.app/api'; 
+
+console.log('Frontend API Base URL:', API_BASE_URL); 
 
 
 const api = axios.create({
@@ -11,26 +12,22 @@ const api = axios.create({
   },
 });
 
-// Request interceptor: attach token and enforce /api prefix
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    if (config.url && !config.url.startsWith('/api/')) {
-      config.url = '/api' + (config.url.startsWith('/') ? config.url : '/' + config.url);
-    }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Response interceptor: handle errors globally
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Extract a user-friendly error message
     let message = 'An unexpected error occurred. Please try again.';
     if (error.response && error.response.data) {
       if (error.response.data.message) {
@@ -41,7 +38,6 @@ api.interceptors.response.use(
     } else if (error.message) {
       message = error.message;
     }
-    // Attach a user-friendly message for UI
     error.userMessage = message;
     return Promise.reject(error);
   }
@@ -50,7 +46,7 @@ api.interceptors.response.use(
 export const auth = {
   register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
-  logout: () => api.post('/auth/logout'),
+  logout: () => api.post('/auth/logout'), 
   getMe: () => api.get('/auth/me'),
 };
 
