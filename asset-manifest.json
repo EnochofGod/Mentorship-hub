@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mentorship-platform-frontend/static/css/main.060ef1c3.css",
-    "main.js": "/mentorship-platform-frontend/static/js/main.828b43f4.js",
+    "main.css": "/mentorship-platform-frontend/static/css/main.849015ac.css",
+    "main.js": "/mentorship-platform-frontend/static/js/main.fc8ac8eb.js",
     "index.html": "/mentorship-platform-frontend/index.html",
-    "main.060ef1c3.css.map": "/mentorship-platform-frontend/static/css/main.060ef1c3.css.map",
-    "main.828b43f4.js.map": "/mentorship-platform-frontend/static/js/main.828b43f4.js.map"
+    "main.849015ac.css.map": "/mentorship-platform-frontend/static/css/main.849015ac.css.map",
+    "main.fc8ac8eb.js.map": "/mentorship-platform-frontend/static/js/main.fc8ac8eb.js.map"
   },
   "entrypoints": [
-    "static/css/main.060ef1c3.css",
-    "static/js/main.828b43f4.js"
+    "static/css/main.849015ac.css",
+    "static/js/main.fc8ac8eb.js"
   ]
 }
