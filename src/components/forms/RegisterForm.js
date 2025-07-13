@@ -5,6 +5,7 @@ function RegisterForm({ onSubmit, loading, error }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState(null);
+  const [role, setRole] = useState('Mentee');
 
   const validateEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -21,11 +22,27 @@ function RegisterForm({ onSubmit, loading, error }) {
       setLocalError('Password must be at least 6 characters.');
       return;
     }
-    onSubmit({ email, password, role: 'Mentee' });
+    onSubmit({ email, password, role });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
+          Register as
+        </label>
+        <select
+          id="role"
+          name="role"
+          value={role}
+          onChange={e => setRole(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mb-2"
+        >
+          <option value="Mentee">Mentee</option>
+          <option value="Mentor">Mentor</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
           Email Address

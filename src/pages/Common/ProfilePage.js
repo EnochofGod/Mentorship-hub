@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { users } from '../../services/api';
 
 function ProfilePage() {
   const { user } = useAuth();
@@ -14,24 +15,9 @@ function ProfilePage() {
       setLoading(false);
       return;
     }
-    fetch(`http://localhost:5000/api/users/me`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          let errorMsg = 'Failed to fetch profile';
-          try {
-            const errorData = await res.json();
-            errorMsg = errorData.message || errorMsg;
-          } catch {}
-          throw new Error(errorMsg);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        // The backend returns { id, email, role, profile: { ... } }
+    users.getCurrentUserProfile()
+      .then((res) => {
+        const data = res.data;
         if (data.profile) {
           setProfile({
             ...data.profile,
@@ -44,7 +30,7 @@ function ProfilePage() {
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.userMessage || err.message || 'Failed to fetch profile');
         setLoading(false);
       });
   }, [user]);
