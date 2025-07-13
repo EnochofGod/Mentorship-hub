@@ -22,8 +22,7 @@ export default function MenteeRequestsPage() {
         setError(null);
       } catch (err) {
         setError(
-          err.response?.data?.message ||
-            'Failed to load requests. Please try again.'
+          err.userMessage || err.message || 'Failed to load requests. Please try again.'
         );
       } finally {
         setLoading(false);

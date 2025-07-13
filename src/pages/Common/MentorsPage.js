@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 
 const INDUSTRY_OPTIONS = [
@@ -38,7 +38,7 @@ function MentorsPage() {
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message || 'Failed to fetch mentors');
+        setError(err.userMessage || err.message || 'Failed to fetch mentors');
         setLoading(false);
       });
   }, []);
@@ -49,8 +49,8 @@ function MentorsPage() {
     try {
       await api.post('/requests', { mentorId });
       setSuccess('Mentorship request sent!');
-    } catch {
-      setError('Failed to send request');
+    } catch (err) {
+      setError(err.userMessage || err.message || 'Failed to send request');
     }
   };
 

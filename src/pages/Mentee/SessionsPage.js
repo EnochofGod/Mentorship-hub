@@ -16,7 +16,7 @@ export default function MenteeSessionsPage() {
         const now = new Date();
         setMySessions(res.data.filter(s => new Date(s.scheduledTime) > now));
       } catch (err) {
-        setError('Failed to load sessions.');
+        setError(err.userMessage || err.message || 'Failed to load sessions.');
       } finally {
         setLoading(false);
       }

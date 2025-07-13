@@ -6,11 +6,11 @@ function HomePage() {
   const { user, isAuthenticated } = useAuth();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-160px)] px-4 text-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
-      <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mb-6 drop-shadow-lg">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-160px)] px-2 sm:px-4 text-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
+      <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mb-6 drop-shadow-lg">
         Welcome to MentorMatch!
       </h1>
-      <p className="text-2xl text-gray-700 mb-10 max-w-2xl leading-relaxed font-medium">
+      <p className="text-lg sm:text-2xl text-gray-700 mb-10 max-w-2xl leading-relaxed font-medium">
         Your platform for connecting aspiring mentees with experienced mentors to foster growth and accelerate success.
       </p>
       {!isAuthenticated ? (

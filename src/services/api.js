@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://mentorship-platform-backend-production.up.railway.app/api'; 
-
-console.log('Frontend API Base URL:', API_BASE_URL); 
-
+// Make sure API_BASE_URL is defined, e.g. from environment variables
+const API_BASE_URL = 'https://mentorship-platform-backend-production.up.railway.app/api';
+console.log('Frontend API Base URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -11,7 +10,6 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
 
 api.interceptors.request.use(
   (config) => {
@@ -23,7 +21,6 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
 
 api.interceptors.response.use(
   (response) => response,
@@ -46,7 +43,7 @@ api.interceptors.response.use(
 export const auth = {
   register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
-  logout: () => api.post('/auth/logout'), 
+  logout: () => api.post('/auth/logout'),
   getMe: () => api.get('/auth/me'),
 };
 

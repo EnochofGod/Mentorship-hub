@@ -26,25 +26,28 @@ function Header() {
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
         <nav className={`fixed md:static top-0 right-0 h-full md:h-auto w-2/3 md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none flex flex-col md:flex-row items-start md:items-center p-8 md:p-0 transition-transform duration-300 z-40 ${menuOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`}>
-          <ul className="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 w-full md:w-auto">
+          <ul className="flex flex-row flex-wrap justify-center md:flex-row md:space-x-8 space-y-0 w-full md:w-auto gap-2 md:gap-0">
             {!isAuthenticated && (
               <>
                 <li>
                   <Link to="/login" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
                     <FaSignInAlt className="text-2xl" />
-                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Login</span>
+                    <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Login</span>
+                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Login</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/register" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
                     <FaUserPlus className="text-2xl" />
-                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Register</span>
+                    <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Register</span>
+                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Register</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/forgot-password" className="relative flex flex-col items-center text-gray-700 hover:text-pink-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)}>
                     <FaKey className="text-2xl" />
-                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Forgot Password</span>
+                    <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Forgot</span>
+                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Forgot Password</span>
                   </Link>
                 </li>
               </>
@@ -54,7 +57,8 @@ function Header() {
                 <li>
                   <Link to="/profile" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Profile">
                     <FaUser className="text-2xl" />
-                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Profile</span>
+                    <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Profile</span>
+                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">My Profile</span>
                   </Link>
                 </li>
                 {/* Admin Links */}
@@ -63,19 +67,22 @@ function Header() {
                     <li>
                       <Link to="/admin/users" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Manage Users">
                         <FaUsers className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Users</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Users</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Users</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/admin/matches" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Matches">
                         <FaExchangeAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Matches</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Matches</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Matches</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/admin/sessions" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Sessions">
                         <FaCalendarAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Sessions</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Sessions</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Sessions</span>
                       </Link>
                     </li>
                   </>
@@ -86,25 +93,29 @@ function Header() {
                     <li>
                       <Link to="/mentor/dashboard" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Mentor Dashboard">
                         <FaChalkboardTeacher className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Dashboard</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Dashboard</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Dashboard</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/mentor/availability" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Set Availability">
                         <FaCalendarAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Availability</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Available</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">My Availability</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/mentor/requests" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Requests">
                         <FaListAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Requests</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Requests</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Requests</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/mentor/sessions" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="View Sessions">
                         <FaCalendarAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Sessions</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Sessions</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Sessions</span>
                       </Link>
                     </li>
                   </>
@@ -115,25 +126,29 @@ function Header() {
                     <li>
                       <Link to="/mentee/dashboard" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Mentee Dashboard">
                         <FaHome className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Dashboard</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Dashboard</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Dashboard</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/mentors" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="Find Mentors">
                         <FaSearch className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">Find Mentors</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Mentors</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Find Mentors</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/mentee/my-requests" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Requests">
                         <FaListAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Requests</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Requests</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">My Requests</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/mentee/my-sessions" className="relative flex flex-col items-center text-gray-700 hover:text-indigo-600 font-semibold transition-colors group" onClick={() => setMenuOpen(false)} title="My Sessions">
                         <FaCalendarAlt className="text-2xl" />
-                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">My Sessions</span>
+                        <span className="mt-1 text-xs font-medium text-gray-700 block md:hidden">Sessions</span>
+                        <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">My Sessions</span>
                       </Link>
                     </li>
                   </>
@@ -149,7 +164,8 @@ function Header() {
                     tabIndex={0}
                   >
                     <FaSignOutAlt className="text-2xl" />
-                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none z-50">Logout</span>
+                    <span className="mt-1 text-xs font-medium text-white block md:hidden">Logout</span>
+                    <span className="absolute left-1/2 top-full mt-2 -translate-x-1/2 px-2 py-1 rounded bg-gray-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none z-50 hidden md:block">Logout</span>
                   </button>
                 </li>
               </>

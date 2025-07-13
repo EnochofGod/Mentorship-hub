@@ -12,7 +12,7 @@ export default function HealthCheckPage() {
       .catch(err => {
         if (err.response) {
           setStatus(`Backend responded with status ${err.response.status}`);
-          setError(err.response.data?.message || JSON.stringify(err.response.data));
+          setError(err.userMessage || err.message || JSON.stringify(err.response.data));
         } else if (err.request) {
           setStatus('No response from backend. Check CORS, server status, or network.');
         } else {
