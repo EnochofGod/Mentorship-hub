@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/Common/LoginPage';
 import RegisterPage from './pages/Common/RegisterPage';
 import ProfileEditPage from './pages/Common/ProfileEditPage';
@@ -30,7 +30,7 @@ import BookSessionPage from './pages/Mentee/BookSessionPage';
 
 function App() {
   return (
-    <Router>
+    <>
       <Header />
       <Routes>
         {/* Common */}
@@ -64,7 +64,7 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
