@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 
+/**
+ * MentorSessionsPage allows mentors to view their sessions and submit feedback and ratings for each session.
+ */
 export default function MentorSessionsPage() {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [feedback, setFeedback] = useState({});
+  const [rating, setRating] = useState({});
   const [success, setSuccess] = useState('');
 
+  // Fetch mentor's sessions on mount
   useEffect(() => {
     api.get('/sessions/mentor')
       .then(res => setSessions(res.data))
@@ -15,6 +20,9 @@ export default function MentorSessionsPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  /**
+   * Submit feedback and rating for a session as a mentor.
+   */
   const handleFeedback = async (sessionId) => {
     setSuccess('');
     setError('');
@@ -23,12 +31,17 @@ export default function MentorSessionsPage() {
       setError('Please enter at least 3 characters of feedback.');
       return;
     }
+    if (!rating[intSessionId]) {
+      setError('Please select a rating.');
+      return;
+    }
     try {
       await api.put(`/sessions/${intSessionId}/feedback`, {
         feedback: feedback[intSessionId]?.text,
+        rating: rating[intSessionId],
         role: 'Mentor',
       });
-      setSuccess('Feedback submitted!');
+      setSuccess('Feedback and rating submitted!');
     } catch (err) {
       setError(err.userMessage || err.message || 'Failed to submit feedback');
     }
@@ -55,6 +68,19 @@ export default function MentorSessionsPage() {
                   onChange={e => setFeedback(f => ({ ...f, [session.id]: { ...f[session.id], text: e.target.value } }))}
                   className="border px-2 py-1 mr-2"
                 />
+                <label className="block font-semibold mt-2">Your Rating:</label>
+                <select
+                  className="border px-2 py-1 mr-2"
+                  value={rating[session.id] || ''}
+                  onChange={e => setRating(r => ({ ...r, [session.id]: e.target.value }))}
+                >
+                  <option value="">Select rating</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
                 <button
                   className="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600"
                   onClick={() => handleFeedback(session.id)}

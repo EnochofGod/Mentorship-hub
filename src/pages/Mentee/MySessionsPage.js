@@ -50,27 +50,105 @@ function MySessionsPage() {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {mySessions
+          // Filter out sessions that are not scheduled in the future
           .filter(session => {
-            // Only show sessions whose scheduledTime is in the future
             if (!session.scheduledTime) return false;
             const sessionDate = new Date(session.scheduledTime);
             return sessionDate > new Date();
           })
+          // Render a card for each upcoming session
           .map((session) => (
-            <div key={session.id} className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold text-indigo-700 mb-2">
-                Session with {session.mentor?.profile?.name || session.mentor?.name || session.mentorId}
-              </h2>
-              <p className="text-gray-600">
-                Date: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleDateString() : 'N/A'}
-              </p>
-              <p className="text-gray-600">
-                Time: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleTimeString() : 'N/A'}
-              </p>
-              <p className="text-gray-600">Status: {session.status}</p>
-              {/* Add more session details as needed */}
-            </div>
+            <SessionCard key={session.id} session={session} />
           ))}
+      </div>
+
+/**
+ * SessionCard displays details and allows the mentee to leave feedback and a rating for a session.
+ */
+function SessionCard({ session }) {
+  const [feedback, setFeedback] = useState(session.feedbackMentee || '');
+  const [saving, setSaving] = useState(false);
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
+  const [rating, setRating] = useState(session.rating || '');
+
+  /**
+   * Submit feedback and rating for this session to the backend.
+   */
+  const handleFeedbackSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setSuccess('');
+    setError('');
+    try {
+      await fetch(`/api/sessions/${session.id}/feedback`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ feedbackMentee: feedback, rating })
+      });
+      setSuccess('Feedback and rating saved!');
+    } catch (err) {
+      setError('Failed to save feedback.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+      <div className="mb-2">
+        <strong>Mentor:</strong> {session.mentor?.profile?.name || session.mentor?.name || session.mentorId}
+      </div>
+      <div className="mb-2">
+        <strong>Mentee:</strong> {session.mentee?.profile?.name || session.mentee?.name || session.menteeId}
+      </div>
+      <div className="mb-2">
+        <strong>Scheduled:</strong> {session.scheduledTime ? new Date(session.scheduledTime).toLocaleString() : 'N/A'}
+      </div>
+      <div className="mb-2">
+        <strong>Mentee Feedback:</strong> {session.feedbackMentee ? session.feedbackMentee : 'N/A'}
+      </div>
+      <div className="mb-2">
+        <strong>Mentor Feedback:</strong> {session.feedbackMentor ? session.feedbackMentor : 'N/A'}
+      </div>
+      <div className="mb-2">
+        <strong>Rating:</strong> {session.rating ? session.rating : 'N/A'}
+      </div>
+      <form onSubmit={handleFeedbackSubmit} className="mt-4">
+        <label className="block text-gray-700 font-semibold mb-1">Your Feedback:</label>
+        <textarea
+          className="w-full border rounded p-2 mb-2"
+          value={feedback}
+          onChange={e => setFeedback(e.target.value)}
+          rows={2}
+          placeholder="Leave your feedback for this session..."
+        />
+        <label className="block text-gray-700 font-semibold mb-1 mt-2">Your Rating:</label>
+        <select
+          className="w-full border rounded p-2 mb-2"
+          value={rating}
+          onChange={e => setRating(e.target.value)}
+        >
+          <option value="">Select rating</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 disabled:opacity-50"
+          disabled={saving}
+        >
+          {saving ? 'Saving...' : 'Save Feedback & Rating'}
+        </button>
+        {success && <p className="text-green-600 mt-2">{success}</p>}
+        {error && <p className="text-red-600 mt-2">{error}</p>}
+      </form>
+    </div>
+  );
+}
       </div>
     </div>
   );

@@ -3,6 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { users, availability, sessions, requests } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
 
+/**
+ * BookSessionPage allows a mentee to book a session with a mentor by selecting an available slot.
+ * It fetches mentor details, available slots, and accepted requests, and handles session booking.
+ */
 export default function BookSessionPage() {
   const { mentorId: mentorIdParam } = useParams();
   const mentorId = parseInt(mentorIdParam, 10);
@@ -16,6 +20,7 @@ export default function BookSessionPage() {
   const [success, setSuccess] = useState('');
   const [acceptedRequests, setAcceptedRequests] = useState([]);
 
+  // Fetch mentor details, slots, and accepted requests on mount
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -23,10 +28,8 @@ export default function BookSessionPage() {
       try {
         const mentorRes = await users.getUserProfileById(mentorId);
         setMentor(mentorRes.data);
-        // Assume you have an endpoint to get a mentor's availability by ID
         const slotsRes = await availability.getMentorAvailabilityById(mentorId);
         setSlots(slotsRes.data);
-        // Fetch accepted requests for this mentee
         const reqRes = await requests.getSentRequests();
         setAcceptedRequests(reqRes.data.filter(r => r.mentorId === mentorId && r.status === 'ACCEPTED'));
       } catch (err) {
@@ -38,12 +41,14 @@ export default function BookSessionPage() {
     fetchData();
   }, [mentorId]);
 
+  /**
+   * Book a session for the selected slot using the accepted mentorship request.
+   */
   const handleBook = async (slotId, slotStart) => {
     setBooking(true);
     setError(null);
     setSuccess('');
     try {
-      // Find the accepted request for this mentor
       const acceptedRequest = acceptedRequests[0];
       if (!acceptedRequest) {
         setError('No accepted mentorship request found for this mentor.');
@@ -80,6 +85,7 @@ export default function BookSessionPage() {
         <li key={slot.id} className="border rounded p-4 bg-white shadow flex items-center justify-between">
         <span>
         {(() => {
+        // Format slot start and end times for display
         const start = new Date(slot.start);
         const end = new Date(slot.end);
         const validStart = !isNaN(start.getTime());

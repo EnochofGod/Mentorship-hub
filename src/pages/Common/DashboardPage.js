@@ -8,15 +8,15 @@ function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch user profile and activity data on mount
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       setError(null);
       try {
-        // Fetch user profile from backend
         const userRes = await users.getCurrentUserProfile();
         setUser(userRes.data);
-        // Fetch activity data based on role
+        // Fetch activity data based on user role
         if (userRes.data.role === 'Mentor') {
           const sessRes = await sessions.getMentorSessions();
           setSessionCount(Array.isArray(sessRes.data) ? sessRes.data.length : 0);

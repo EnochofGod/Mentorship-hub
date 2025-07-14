@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Make sure API_BASE_URL is defined, e.g. from environment variables
+// API service for all backend requests (auth, users, sessions, requests, availability)
 const API_BASE_URL = 'https://mentorship-platform-backend-production.up.railway.app/api';
 console.log('Frontend API Base URL:', API_BASE_URL);
 
@@ -62,8 +62,10 @@ export const requests = {
 };
 
 export const sessions = {
+  /**
+   * Schedule a new session. Ensures mentorId, menteeId, and userId are integers if present.
+   */
   scheduleSession: (sessionData) => {
-    // Ensure mentorId, menteeId, and userId are integers if present
     const data = { ...sessionData };
     if (data.mentorId) data.mentorId = parseInt(data.mentorId, 10);
     if (data.menteeId) data.menteeId = parseInt(data.menteeId, 10);
@@ -77,8 +79,10 @@ export const sessions = {
 export const availability = {
   getMentorAvailability: () => api.get('/availability/me'),
   getMentorAvailabilityById: (mentorId) => api.get(`/availability/${parseInt(mentorId, 10)}`),
+  /**
+   * Add a new availability slot for a mentor. Ensures mentorId is integer if present.
+   */
   addAvailabilitySlot: (slotData) => {
-    // Ensure mentorId is integer if present
     const data = { ...slotData };
     if (data.mentorId) data.mentorId = parseInt(data.mentorId, 10);
     return api.post('/availability', data);

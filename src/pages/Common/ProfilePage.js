@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { users } from '../../services/api';
 
+/**
+ * ProfilePage fetches and displays the current user's profile information.
+ * Allows navigation to the profile edit page.
+ */
 function ProfilePage() {
   const { user } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -10,6 +14,7 @@ function ProfilePage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch the current user's profile from the backend on mount
   useEffect(() => {
     if (!user) {
       setLoading(false);
