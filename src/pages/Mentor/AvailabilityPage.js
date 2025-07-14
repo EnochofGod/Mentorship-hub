@@ -31,9 +31,8 @@ export default function AvailabilityPage() {
       return;
     }
     try {
-      // Map dayOfWeek to day for backend compatibility
-      const payload = { ...form, day: form.dayOfWeek, mentorId: user.id };
-      delete payload.dayOfWeek;
+      // Send dayOfWeek as is for backend compatibility
+      const payload = { ...form, mentorId: user.id };
       const res = await api.post('/availability', payload);
       setSlots(slots => [...slots, res.data]);
       setForm({ dayOfWeek: '', startTime: '', endTime: '' });
