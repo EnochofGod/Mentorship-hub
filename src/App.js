@@ -9,6 +9,7 @@ import ResetPasswordPage from './pages/Common/ResetPasswordPage';
 import HomePage from './pages/Common/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import HealthCheckPage from './pages/HealthCheckPage';
+import DashboardPage from './pages/Common/DashboardPage';
 // Admin
 import UsersPage from './pages/Admin/UsersPage';
 import MatchesPage from './pages/Admin/MatchesPage';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/profile/edit" element={<ProfileEditPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />

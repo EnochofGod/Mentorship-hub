@@ -46,7 +46,7 @@ function ProfilePage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-160px)] px-2 sm:px-4 text-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-160px)] px-4 sm:px-6 md:px-8 w-full max-w-screen-sm mx-auto text-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
       <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 w-full max-w-md mx-auto">
         <div className="flex flex-col items-center mb-6">
           <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mb-4">

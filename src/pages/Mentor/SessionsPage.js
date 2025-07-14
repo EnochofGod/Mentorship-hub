@@ -18,13 +18,14 @@ export default function MentorSessionsPage() {
   const handleFeedback = async (sessionId) => {
     setSuccess('');
     setError('');
-    if (!feedback[sessionId]?.text || feedback[sessionId].text.length < 3) {
+    const intSessionId = parseInt(sessionId, 10);
+    if (!feedback[intSessionId]?.text || feedback[intSessionId].text.length < 3) {
       setError('Please enter at least 3 characters of feedback.');
       return;
     }
     try {
-      await api.put(`/sessions/${sessionId}/feedback`, {
-        feedback: feedback[sessionId]?.text,
+      await api.put(`/sessions/${intSessionId}/feedback`, {
+        feedback: feedback[intSessionId]?.text,
         role: 'Mentor',
       });
       setSuccess('Feedback submitted!');

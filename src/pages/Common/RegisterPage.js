@@ -34,7 +34,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-2 sm:px-4 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
+    <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-4 sm:px-6 md:px-8 w-full max-w-screen-sm mx-auto bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
       <div className="w-full max-w-md bg-white p-4 sm:p-8 rounded-lg shadow-xl mx-auto my-6 sm:my-12">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-6">
           Create an account

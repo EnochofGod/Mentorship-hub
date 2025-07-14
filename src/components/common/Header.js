@@ -25,8 +25,8 @@ function Header() {
         <button className="md:hidden text-white focus:outline-none" onClick={toggleMenu} aria-label="Toggle menu">
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
-        <nav className={`fixed md:static top-0 right-0 h-full md:h-auto w-2/3 md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none flex flex-col md:flex-row items-start md:items-center p-8 md:p-0 transition-transform duration-300 z-40 ${menuOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`}>
-          <ul className="flex flex-row flex-wrap justify-center md:flex-row md:space-x-8 space-y-0 w-full md:w-auto gap-2 md:gap-0">
+        <nav className={`fixed md:static top-0 right-0 h-full md:h-auto w-full md:w-auto bg-white md:bg-transparent shadow-lg md:shadow-none flex flex-col md:flex-row items-start md:items-center p-8 md:p-0 transition-transform duration-300 z-40 ${menuOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`} style={{maxWidth: '100vw'}}>
+          <ul className="flex flex-col md:flex-row w-full md:w-auto space-y-4 md:space-y-0 md:space-x-8 gap-0 md:gap-0">
             {!isAuthenticated && (
               <>
                 <li>

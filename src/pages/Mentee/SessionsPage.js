@@ -35,7 +35,7 @@ export default function MenteeSessionsPage() {
       <ul className="space-y-4">
         {mySessions.map(session => (
           <li key={session.id} className="border rounded p-4 bg-white shadow">
-            <p><strong>Mentor:</strong> {session.mentor?.name || session.mentorId}</p>
+            <p><strong>Mentor:</strong> {session.mentor?.name || (Number.isInteger(session.mentorId) ? session.mentorId : 'N/A')}</p>
             <p><strong>Scheduled:</strong> {new Date(session.scheduledTime).toLocaleString()}</p>
             <p><strong>Status:</strong> {session.status}</p>
           </li>

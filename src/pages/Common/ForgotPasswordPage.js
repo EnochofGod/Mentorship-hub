@@ -36,7 +36,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-4 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
+    <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-4 sm:px-6 md:px-8 w-full max-w-screen-sm mx-auto bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
       <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-xl">
         <h2 className="text-2xl font-extrabold text-gray-900 text-center mb-6">Forgot Password</h2>
         {success && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md mb-4">{success}</div>}

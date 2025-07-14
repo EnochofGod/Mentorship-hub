@@ -27,8 +27,8 @@ export default function SessionsPage() {
           <ul className="space-y-4">
             {sessions.map(session => (
               <li key={session.id} className="border rounded p-4 bg-white shadow">
-                <p><strong>Mentor:</strong> {session.mentorId}</p>
-                <p><strong>Mentee:</strong> {session.menteeId}</p>
+                <p><strong>Mentor:</strong> {Number.isInteger(session.mentorId) ? session.mentorId : 'N/A'}</p>
+                <p><strong>Mentee:</strong> {Number.isInteger(session.menteeId) ? session.menteeId : 'N/A'}</p>
                 <p><strong>Scheduled:</strong> {new Date(session.scheduledTime).toLocaleString()}</p>
                 <p><strong>Mentee Feedback:</strong> {session.feedbackMentee || 'N/A'}</p>
                 <p><strong>Mentor Feedback:</strong> {session.feedbackMentor || 'N/A'}</p>

@@ -49,28 +49,40 @@ export const auth = {
 
 export const users = {
   getCurrentUserProfile: () => api.get('/users/me'),
-  getUserProfileById: (id) => api.get(`/users/${id}`),
+  getUserProfileById: (id) => api.get(`/users/${parseInt(id, 10)}`),
   getMentors: () => api.get('/users/mentors'),
   updateCurrentUserProfile: (profileData) => api.put('/users/me/profile', profileData),
 };
 
 export const requests = {
-  sendMentorshipRequest: (mentorId) => api.post('/requests', { mentorId }),
+  sendMentorshipRequest: (mentorId) => api.post('/requests', { mentorId: parseInt(mentorId, 10) }),
   getReceivedRequests: () => api.get('/requests/received'),
   getSentRequests: () => api.get('/requests/sent'),
-  updateRequestStatus: (requestId, status) => api.put(`/requests/${requestId}`, { status }),
+  updateRequestStatus: (requestId, status) => api.put(`/requests/${parseInt(requestId, 10)}`, { status }),
 };
 
 export const sessions = {
-  scheduleSession: (sessionData) => api.post('/sessions', sessionData),
+  scheduleSession: (sessionData) => {
+    // Ensure mentorId, menteeId, and userId are integers if present
+    const data = { ...sessionData };
+    if (data.mentorId) data.mentorId = parseInt(data.mentorId, 10);
+    if (data.menteeId) data.menteeId = parseInt(data.menteeId, 10);
+    if (data.userId) data.userId = parseInt(data.userId, 10);
+    return api.post('/sessions', data);
+  },
   getMentorSessions: () => api.get('/sessions/mentor'),
   getMenteeSessions: () => api.get('/sessions/mentee'),
 };
 
 export const availability = {
   getMentorAvailability: () => api.get('/availability/me'),
-  getMentorAvailabilityById: (mentorId) => api.get(`/availability/${mentorId}`),
-  addAvailabilitySlot: (slotData) => api.post('/availability', slotData),
+  getMentorAvailabilityById: (mentorId) => api.get(`/availability/${parseInt(mentorId, 10)}`),
+  addAvailabilitySlot: (slotData) => {
+    // Ensure mentorId is integer if present
+    const data = { ...slotData };
+    if (data.mentorId) data.mentorId = parseInt(data.mentorId, 10);
+    return api.post('/availability', data);
+  },
 };
 
 export default api;

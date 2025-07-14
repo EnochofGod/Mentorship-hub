@@ -11,21 +11,8 @@ function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      // Redirect to profile creation if new user (no profile)
-      const user = JSON.parse(localStorage.getItem('user')) || {};
-      if (!user.profile) {
-        navigate('/profile/edit', { replace: true });
-        return;
-      }
-      if (user.role === 'Admin') {
-        navigate('/admin/users', { replace: true });
-      } else if (user.role === 'Mentor') {
-        navigate('/mentor/dashboard', { replace: true });
-      } else if (user.role === 'Mentee') {
-        navigate('/mentee/dashboard', { replace: true });
-      } else {
-        navigate('/profile', { replace: true });
-      }
+      // Redirect all users to a unified dashboard after login
+      navigate('/dashboard', { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
@@ -42,7 +29,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-2 sm:px-4 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
+    <div className="flex items-center justify-center min-h-[calc(100vh-160px)] px-4 sm:px-6 md:px-8 w-full max-w-screen-sm mx-auto bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
       <div className="w-full max-w-md bg-white p-4 sm:p-8 rounded-lg shadow-xl mx-auto my-6 sm:my-12">
         <LoginForm onSubmit={handleLogin} loading={loading} error={error} />
         <p className="mt-8 text-center text-gray-700 text-base">

@@ -17,9 +17,10 @@ export default function MentorRequestsPage() {
   const handleAction = async (id, status) => {
     setSuccess('');
     setError('');
+    const intId = parseInt(id, 10);
     try {
-      await api.put(`/requests/${id}`, { status });
-      setRequests(reqs => reqs.map(r => r.id === id ? { ...r, status } : r));
+      await api.put(`/requests/${intId}`, { status });
+      setRequests(reqs => reqs.map(r => r.id === intId ? { ...r, status } : r));
       setSuccess('Request updated successfully!');
     } catch (err) {
       setError(err.userMessage || err.message || 'Failed to update request');

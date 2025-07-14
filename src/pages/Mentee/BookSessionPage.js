@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { users, availability, sessions } from '../../services/api';
 
 export default function BookSessionPage() {
-  const { mentorId } = useParams();
+  const { mentorId: mentorIdParam } = useParams();
+  const mentorId = parseInt(mentorIdParam, 10);
   const navigate = useNavigate();
   const [mentor, setMentor] = useState(null);
   const [slots, setSlots] = useState([]);

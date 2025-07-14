@@ -78,6 +78,7 @@ export default function UsersPage() {
                 <th className="border px-4 py-2">Email</th>
                 <th className="border px-4 py-2">Role</th>
                 <th className="border px-4 py-2">Change Role</th>
+                <th className="border px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -93,6 +94,26 @@ export default function UsersPage() {
                       <option value="Mentee">Mentee</option>
                     </select>
                     <button className="ml-2 px-2 py-1 bg-indigo-500 text-white rounded" onClick={() => handleRoleUpdate(user.id)}>Update</button>
+                  </td>
+                  <td className="border px-4 py-2">
+                    <button
+                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700 transition"
+                      onClick={async () => {
+                        if (window.confirm(`Are you sure you want to delete user ${user.email}?`)) {
+                          setSuccess('');
+                          setError('');
+                          try {
+                            await api.delete(`/admin/users/${user.id}`);
+                            setUsers(users => users.filter(u => u.id !== user.id));
+                            setSuccess('User deleted successfully!');
+                          } catch (err) {
+                            setError(err.userMessage || err.message || 'Failed to delete user');
+                          }
+                        }
+                      }}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

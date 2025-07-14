@@ -49,7 +49,7 @@ export default function MenteeRequestsPage() {
             <button
               key={req.id}
               className="bg-white rounded-lg shadow-md p-6 border-2 border-green-400 hover:border-indigo-500 transition-colors w-full text-left"
-              onClick={() => window.location.href = `/mentors/${req.mentorId}/book`}
+              onClick={() => window.location.href = `/mentors/${parseInt(req.mentorId, 10)}/book`}
             >
               <h2 className="text-xl font-semibold text-indigo-700 mb-2">
                 Request to {req.mentor?.profile?.name || req.mentorId}

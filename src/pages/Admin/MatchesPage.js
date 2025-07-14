@@ -27,7 +27,11 @@ export default function MatchesPage() {
       return;
     }
     try {
-      const res = await api.post('/admin/assign', form);
+      const payload = {
+        mentorId: parseInt(form.mentorId, 10),
+        menteeId: parseInt(form.menteeId, 10)
+      };
+      const res = await api.post('/admin/assign', payload);
       setMatches(m => [...m, res.data]);
       setForm({ mentorId: '', menteeId: '' });
       setSuccess('Mentor assigned!');

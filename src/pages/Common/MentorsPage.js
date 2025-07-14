@@ -47,7 +47,7 @@ function MentorsPage() {
     setSuccess('');
     setError('');
     try {
-      await api.post('/requests', { mentorId });
+      await api.post('/requests', { mentorId: parseInt(mentorId, 10) });
       setSuccess('Mentorship request sent!');
     } catch (err) {
       setError(err.userMessage || err.message || 'Failed to send request');
