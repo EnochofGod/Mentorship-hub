@@ -9,6 +9,7 @@ export default function AvailabilityPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  // Fetch mentor's current availability slots on mount
   useEffect(() => {
     api.get('/availability/me')
       .then(res => setSlots(res.data))
@@ -16,8 +17,12 @@ export default function AvailabilityPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Handle form field changes
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
+  /**
+   * Handle form submission to add a new availability slot for the mentor.
+   */
   const handleSubmit = async e => {
     e.preventDefault();
     setSuccess('');
@@ -31,7 +36,6 @@ export default function AvailabilityPage() {
       return;
     }
     try {
-      // Send dayOfWeek as is for backend compatibility
       const payload = { ...form, mentorId: user.id };
       const res = await api.post('/availability', payload);
       setSlots(slots => [...slots, res.data]);

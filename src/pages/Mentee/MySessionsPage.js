@@ -2,66 +2,6 @@ import React, { useEffect, useState } from "react";
 import { sessions } from "../../services/api";
 import { useAuth } from "../../contexts/AuthContext";
 
-function MySessionsPage() {
-  const { user } = useAuth();
-  const [mySessions, setMySessions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchMySessions = async () => {
-      if (!user) {
-        setError("User not authenticated.");
-        setLoading(false);
-        return;
-      }
-      try {
-        setLoading(true);
-        const res = await sessions.getMenteeSessions();
-        setMySessions(res.data);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch mentee sessions:", err);
-        setError(
-          err.response?.data?.message ||
-            "Failed to load sessions. Please try again."
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMySessions();
-  }, [user]);
-
-  return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
-        My Mentorship Sessions
-      </h1>
-      {loading && (
-        <p className="text-lg text-gray-700">Loading your sessions...</p>
-      )}
-      {error && <p className="text-lg text-red-600">{error}</p>}
-      {!loading && !error && mySessions.length === 0 && (
-        <p className="text-lg text-gray-700">
-          You don't have any upcoming or past sessions.
-        </p>
-      )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mySessions
-          // Filter out sessions that are not scheduled in the future
-          .filter(session => {
-            if (!session.scheduledTime) return false;
-            const sessionDate = new Date(session.scheduledTime);
-            return sessionDate > new Date();
-          })
-          // Render a card for each upcoming session
-          .map((session) => (
-            <SessionCard key={session.id} session={session} />
-          ))}
-      </div>
-
 /**
  * SessionCard displays details and allows the mentee to leave feedback and a rating for a session.
  */
@@ -149,6 +89,65 @@ function SessionCard({ session }) {
     </div>
   );
 }
+
+function MySessionsPage() {
+  const { user } = useAuth();
+  const [mySessions, setMySessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMySessions = async () => {
+      if (!user) {
+        setError("User not authenticated.");
+        setLoading(false);
+        return;
+      }
+      try {
+        setLoading(true);
+        const res = await sessions.getMenteeSessions();
+        setMySessions(res.data);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch mentee sessions:", err);
+        setError(
+          err.response?.data?.message ||
+            "Failed to load sessions. Please try again."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMySessions();
+  }, [user]);
+
+  return (
+    <div className="container mx-auto py-8">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+        My Mentorship Sessions
+      </h1>
+      {loading && (
+        <p className="text-lg text-gray-700">Loading your sessions...</p>
+      )}
+      {error && <p className="text-lg text-red-600">{error}</p>}
+      {!loading && !error && mySessions.length === 0 && (
+        <p className="text-lg text-gray-700">
+          You don't have any upcoming or past sessions.
+        </p>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {mySessions
+          // Filter out sessions that are not scheduled in the future
+          .filter(session => {
+            if (!session.scheduledTime) return false;
+            const sessionDate = new Date(session.scheduledTime);
+            return sessionDate > new Date();
+          })
+          // Render a card for each upcoming session
+          .map((session) => (
+            <SessionCard key={session.id} session={session} />
+          ))}
       </div>
     </div>
   );

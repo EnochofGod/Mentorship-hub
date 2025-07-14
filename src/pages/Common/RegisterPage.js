@@ -22,7 +22,7 @@ function RegisterPage() {
     setError(null);
     setSuccessMessage(null);
     try {
-      // Use the shared API service to guarantee correct endpoint and error handling
+      // Use the shared API service for registration
       const { auth } = await import('../../services/api');
       await auth.register({ email, password, role });
       setSuccessMessage('Registration successful! Logging you in...');
