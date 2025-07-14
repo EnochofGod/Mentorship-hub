@@ -23,7 +23,7 @@ const INDUSTRY_OPTIONS = [
   'Product Management (Tech)'
 ];
 
-function ProfileForm({ onSubmit, initialData, loading, error, userRole }) {
+function ProfileForm({ onSubmit, initialData, loading, error, userRole, userId, userEmail, userRoleLabel }) {
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
   const [skills, setSkills] = useState('');
@@ -67,6 +67,11 @@ function ProfileForm({ onSubmit, initialData, loading, error, userRole }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Edit Your Profile</h2>
+      <div className="mb-4 p-4 bg-gray-50 rounded border border-gray-200">
+        <div className="mb-1 text-sm text-gray-600"><span className="font-semibold">User ID:</span> {userId || 'N/A'}</div>
+        <div className="mb-1 text-sm text-gray-600"><span className="font-semibold">Email:</span> {userEmail || 'N/A'}</div>
+        <div className="mb-1 text-sm text-gray-600"><span className="font-semibold">Role:</span> {userRoleLabel || userRole || 'N/A'}</div>
+      </div>
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
           Full Name
