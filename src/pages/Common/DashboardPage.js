@@ -42,6 +42,8 @@ function DashboardPage() {
 
   const profileName = user?.profile?.name || user?.name || user?.email || 'User';
   const userId = user?.id || user?._id || (user?.profile && user.profile.id) || 'N/A';
+  const email = user?.email || (user?.profile && user.profile.email) || '';
+  const role = user?.role || (user?.profile && user.profile.role) || '';
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-160px)] px-4 sm:px-6 md:px-8 py-8 w-full max-w-screen-md mx-auto bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 animate-fade-in">
@@ -50,8 +52,8 @@ function DashboardPage() {
       <p className="text-base text-indigo-600 font-semibold mb-2">
         Your User ID: {userId}
       </p>
-      <p className="text-base text-gray-600 mb-4">Email: {user?.email}</p>
-      <p className="text-base text-gray-600 mb-4">Role: {user?.role}</p>
+      <p className="text-base text-gray-600 mb-4">Email: {email}</p>
+      <p className="text-base text-gray-600 mb-4">Role: {role}</p>
       <div className="w-full max-w-md mt-6 bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-bold text-indigo-700 mb-2">Your Activity</h2>
         {loading ? (
