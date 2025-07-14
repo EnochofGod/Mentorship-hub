@@ -49,21 +49,28 @@ function MySessionsPage() {
         </p>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mySessions.map((session) => (
-          <div key={session.id} className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold text-indigo-700 mb-2">
-              Session with {session.mentor?.profile?.name || session.mentorId}
-            </h2>
-            <p className="text-gray-600">
-              Date: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleDateString() : 'N/A'}
-            </p>
-            <p className="text-gray-600">
-              Time: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleTimeString() : 'N/A'}
-            </p>
-            <p className="text-gray-600">Status: {session.status}</p>
-            {/* Add more session details as needed */}
-          </div>
-        ))}
+        {mySessions
+          .filter(session => {
+            // Only show sessions whose scheduledTime is in the future
+            if (!session.scheduledTime) return false;
+            const sessionDate = new Date(session.scheduledTime);
+            return sessionDate > new Date();
+          })
+          .map((session) => (
+            <div key={session.id} className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-xl font-semibold text-indigo-700 mb-2">
+                Session with {session.mentor?.profile?.name || session.mentor?.name || session.mentorId}
+              </h2>
+              <p className="text-gray-600">
+                Date: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleDateString() : 'N/A'}
+              </p>
+              <p className="text-gray-600">
+                Time: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleTimeString() : 'N/A'}
+              </p>
+              <p className="text-gray-600">Status: {session.status}</p>
+              {/* Add more session details as needed */}
+            </div>
+          ))}
       </div>
     </div>
   );
