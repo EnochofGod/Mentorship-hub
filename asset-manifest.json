@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Mentorship-hub/static/css/main.fb0e4e54.css",
-    "main.js": "/Mentorship-hub/static/js/main.0fb703a7.js",
+    "main.css": "/Mentorship-hub/static/css/main.ab18c414.css",
+    "main.js": "/Mentorship-hub/static/js/main.367b617e.js",
     "index.html": "/Mentorship-hub/index.html",
-    "main.fb0e4e54.css.map": "/Mentorship-hub/static/css/main.fb0e4e54.css.map",
-    "main.0fb703a7.js.map": "/Mentorship-hub/static/js/main.0fb703a7.js.map"
+    "main.ab18c414.css.map": "/Mentorship-hub/static/css/main.ab18c414.css.map",
+    "main.367b617e.js.map": "/Mentorship-hub/static/js/main.367b617e.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb0e4e54.css",
-    "static/js/main.0fb703a7.js"
+    "static/css/main.ab18c414.css",
+    "static/js/main.367b617e.js"
   ]
 }
