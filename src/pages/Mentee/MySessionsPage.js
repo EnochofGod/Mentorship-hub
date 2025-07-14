@@ -55,11 +55,10 @@ function MySessionsPage() {
               Session with {session.mentor?.profile?.name || session.mentorId}
             </h2>
             <p className="text-gray-600">
-              Date: {new Date(session.startTime).toLocaleDateString()}
+              Date: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleDateString() : 'N/A'}
             </p>
             <p className="text-gray-600">
-              Time: {new Date(session.startTime).toLocaleTimeString()} -{" "}
-              {new Date(session.endTime).toLocaleTimeString()}
+              Time: {session.scheduledTime ? new Date(session.scheduledTime).toLocaleTimeString() : 'N/A'}
             </p>
             <p className="text-gray-600">Status: {session.status}</p>
             {/* Add more session details as needed */}
