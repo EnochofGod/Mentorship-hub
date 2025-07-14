@@ -33,13 +33,13 @@ function LoginPage() {
       <div className="w-full max-w-md bg-white p-4 sm:p-8 rounded-lg shadow-xl mx-auto my-6 sm:my-12">
         <LoginForm onSubmit={handleLogin} loading={loading} error={error} />
         <p className="mt-8 text-center text-gray-700 text-base">
-          <a href="/forgot-password" className="font-bold text-pink-600 hover:text-indigo-500 transition-colors underline mr-4">
+          <Link to="/forgot-password" className="font-bold text-pink-600 hover:text-indigo-500 transition-colors underline mr-4">
             Forgot password?
-          </a>
+          </Link>
           Don't have an account?{' '}
-          <a href="/register" className="font-bold text-indigo-600 hover:text-pink-500 transition-colors underline">
+          <Link to="/register" className="font-bold text-indigo-600 hover:text-pink-500 transition-colors underline">
             Register here
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -23,11 +23,12 @@ const INDUSTRY_OPTIONS = [
   'Product Management (Tech)'
 ];
 
-function ProfileForm({ onSubmit, initialData, loading, error }) {
+function ProfileForm({ onSubmit, initialData, loading, error, userRole }) {
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
   const [skills, setSkills] = useState('');
   const [goals, setGoals] = useState('');
+  const [industry, setIndustry] = useState('');
   const [localError, setLocalError] = useState(null);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ function ProfileForm({ onSubmit, initialData, loading, error }) {
       setBio(initialData.bio || '');
       setSkills(Array.isArray(initialData.skills) ? initialData.skills.join(', ') : '');
       setGoals(initialData.goals || '');
+      setIndustry(initialData.industry || '');
     }
   }, [initialData]);
 
@@ -55,7 +57,11 @@ function ProfileForm({ onSubmit, initialData, loading, error }) {
       return;
     }
     const skillsArray = skills.split(',').map(s => s.trim()).filter(s => s !== '');
-    onSubmit({ name, bio, skills: skillsArray, goals });
+    const formData = { name, bio, skills: skillsArray, goals };
+    if (userRole === 'Mentor') {
+      formData.industry = industry;
+    }
+    onSubmit(formData);
   };
 
   return (
@@ -117,6 +123,26 @@ function ProfileForm({ onSubmit, initialData, loading, error }) {
           placeholder="e.g., Improve product design skills, Learn backend development"
         ></textarea>
       </div>
+      {userRole === 'Mentor' && (
+        <div>
+          <label htmlFor="industry" className="block text-sm font-medium text-gray-700 mb-1">
+            Industry
+          </label>
+          <select
+            id="industry"
+            name="industry"
+            value={industry}
+            onChange={e => setIndustry(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          >
+            <option value="">Select your industry</option>
+            {INDUSTRY_OPTIONS.map(opt => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+      )}
       {(localError || error) && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative" role="alert">
           <p className="font-bold">Error!</p>

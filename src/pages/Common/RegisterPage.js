@@ -47,13 +47,13 @@ function RegisterPage() {
         )}
         <RegisterForm onSubmit={handleRegister} loading={loading} error={error} />
         <p className="mt-6 text-center text-gray-600 text-sm">
-          <a href="/forgot-password" className="font-bold text-pink-600 hover:text-indigo-500 transition-colors underline mr-4">
+          <Link to="/forgot-password" className="font-bold text-pink-600 hover:text-indigo-500 transition-colors underline mr-4">
             Forgot password?
-          </a>
+          </Link>
           Already have an account?{' '}
-          <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
             Login here
-          </a>
+          </Link>
         </p>
       </div>
     </div>

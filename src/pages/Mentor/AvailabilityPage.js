@@ -3,6 +3,7 @@ import api from '../../services/api';
 
 export default function AvailabilityPage() {
   const [slots, setSlots] = useState([]);
+  const user = JSON.parse(localStorage.getItem('user')) || {};
   const [form, setForm] = useState({ dayOfWeek: '', startTime: '', endTime: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -21,12 +22,17 @@ export default function AvailabilityPage() {
     e.preventDefault();
     setSuccess('');
     setError('');
-    if (!form.dayOfWeek || !form.startTime || !form.endTime) {
+    if (!form.dayOfWeek) {
+      setError('Day is required');
+      return;
+    }
+    if (!form.startTime || !form.endTime) {
       setError('Please fill in all fields.');
       return;
     }
     try {
-      const res = await api.post('/availability', form);
+      const payload = { ...form, mentorId: user.id };
+      const res = await api.post('/availability', payload);
       setSlots(slots => [...slots, res.data]);
       setForm({ dayOfWeek: '', startTime: '', endTime: '' });
       setSuccess('Availability slot added!');
