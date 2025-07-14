@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import RegisterForm from '../../components/forms/RegisterForm';
 import { useAuth } from '../../contexts/AuthContext';
 
