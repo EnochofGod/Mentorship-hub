@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mentorship-platform-frontend/static/css/main.060ef1c3.css",
+    "main.js": "/mentorship-platform-frontend/static/js/main.5eeceeb3.js",
+    "index.html": "/mentorship-platform-frontend/index.html",
+    "main.060ef1c3.css.map": "/mentorship-platform-frontend/static/css/main.060ef1c3.css.map",
+    "main.5eeceeb3.js.map": "/mentorship-platform-frontend/static/js/main.5eeceeb3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.060ef1c3.css",
+    "static/js/main.5eeceeb3.js"
+  ]
+}
