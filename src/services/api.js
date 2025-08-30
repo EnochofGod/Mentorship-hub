@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API service for all backend requests (auth, users, sessions, requests, availability)
-const API_BASE_URL = 'https://mentorship-platform-backend-production.up.railway.app/api';
+const API_BASE_URL = 'https://mentorship-platform-backend-4jbj.onrender.com/api';
 console.log('Frontend API Base URL:', API_BASE_URL);
 
 const api = axios.create({
